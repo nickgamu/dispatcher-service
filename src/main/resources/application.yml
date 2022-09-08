@@ -32,8 +32,23 @@ spring:
   rabbitmq:
     host: localhost
     port: 5672
-    username: guest
-    password: guest
+    username: user
+    password: password
     connection-timeout: 5s
 
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,health
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+      probes:
+        enabled: true
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
